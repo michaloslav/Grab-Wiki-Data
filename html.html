@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grab Wiki Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css.css">
+  </head>
+  <body>
+    <div class="container">
+      <div id="inputRow" class="row">
+        <div class="input-field col s5 m4">
+          <input id="term" type="text" autofocus>
+          <label for="term">Terms (seperated by commas)</label>
+        </div>
+        <div class="col s1 m1 center-align">
+          <span style="position: relative; top: 1em;">
+            or
+          </span>
+        </div>
+        <div id="langDiv" class="input-field col s3 m4" onchange="langChange()">
+          <select id="lang">
+            <optgroup label="European">
+              <option value="nl">Dutch</option>
+              <option value="en" selected>English</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="pt">Portuguese</option>
+              <option value="ru">Russian</option>
+              <option value="es">Spanish</option>
+            </optgroup>
+            <optgroup label="Asian">
+              <option value="zh">Chinese</option>
+              <option value="ja">Japanese</option>
+              <option value="ko">Korean</option>
+              <option value="vi">Vietnamese</option>
+            </optgroup>
+            <option value="custom">Other</option>
+          </select>
+          <label>Language</label>
+        </div>
+        <div class="col s3 m3">
+          <button class="btn waves-effect waves-light cyan darken-1" name="action" onclick="getData()">
+            Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+      <div id="actionButtonsRow" class="row">
+        <div class="col s5">
+          <button class="btn waves-effect waves-red red darken-3" onclick="deleteResults()">Empty results</button>
+        </div>
+        <div class="col s2">
+          <i id="settingsIcon" class="material-icons" onclick="toggleSettings()">settings</i>
+        </div>
+        <div class="col s5">
+          <button class="btn waves-effect waves-light cyan darken-1" onclick="downloadResults()">Download results</button>
+        </div>
+      </div>
+      <div id="settings">
+        <div class="row">
+          <div class="switch col s5">
+            <label>
+              Plain text
+              <input id="html" type="checkbox">
+              <span class="lever"></span>
+              HTML
+            </label>
+          </div>
+          <div class="input-field col s4">
+            <label for="length">Length (characters):</label>
+            <input id="length" type="number" class="s3" value="250">
+          </div>
+          <div class="input-field col s3">
+            <label for="length">
+              Separator:
+              <i class="material-icons help tooltipped" data-position="top"
+                data-tooltip="The character that separates terms in the input (a comma by default)">
+                help
+              </i>
+            </label>
+            <input id="separator" type="text" class="s3" value=",">
+          </div>
+        </div>
+        <ul id="customLangCollapsible" class="collapsible">
+          <li>
+            <div class="collapsible-header">
+              <i class="material-icons">add</i>
+              Use a custom language
+            </div>
+            <div class="collapsible-body">
+              Go to Wikipedia in the language you want to use. The link will be something like this:<br>
+              <b>{language code}.wikipedia.org</b>.
+              <p>Copy the language code from the link and paste it here:</p>
+              <div class="input-field">
+                <label for="customLang">Language code</label>
+                <input id="customLang" type="text" onchange="changedCustomLang()">
+              </div>
+                <!--<div class="input-field col s7 l5">
+                  <label for="langName">Language name (optional)</label>
+                  <input id="langName" type="text">
+                </div>
+                <div class="col s12 l4 xl3 center">
+                  <button class="btn waves-effect waves-green green accent-4" onclick="addUserLang()">
+                    <i class="material-icons left">add</i>
+                    Start using
+                  </button>
+                </div>-->
+              To stop using this language, simply delete the language code from the input field
+            </div>
+          </li>
+        </ul>
+      </div>
+      <ul id="results">
+
+      </ul>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js.js"></script>
+  </body>
+</html>
