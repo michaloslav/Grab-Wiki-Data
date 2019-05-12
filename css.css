@@ -1,3 +1,9 @@
+.container{
+  min-height: 100vh;
+  padding-bottom: 1.5rem;
+  position: relative;
+}
+
 .col{
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -9,14 +15,70 @@
   text-align: center;
 }
 
+@keyframes rotateIconOpen{
+  from {transform: rotate(0deg)}
+  to {transform: rotate(120deg)}
+}
+
+@keyframes rotateIconClose{
+  from {transform: rotate(120deg)}
+  to {transform: rotate(0deg)}
+}
+
 #settingsIcon{
   cursor: pointer;
   font-size: 1.5em;
+  animation-duration: .2s;
+  animation-timing-function: cubic-bezier(0.58, 0.2, 0.46, 0.82);
+}
+
+#settingsIcon.open{
+  -webkit-animation-name: rotateIconOpen;
+  animation-name: rotateIconOpen;
+}
+
+#settingsIcon.closed{
+  -webkit-animation-name: rotateIconClose;
+  animation-name: rotateIconClose;
 }
 
 #settings{
-  display: none;
   text-align: center;
+  overflow: hidden;
+  -webkit-transition: height .25s cubic-bezier(0.57, -0.23, 0.35, 1.1);
+  transition: height  .25s cubic-bezier(0.57, -0.23, 0.35, 1.1);
+}
+
+#settings.open{
+  height: 13rem;
+}
+
+@media (min-width: 751px){
+  #settings.collapsibleOpen{
+    height: 28rem;
+  }
+}
+
+@media (max-width: 750px) and (min-width: 510px){
+  #settings.collapsibleOpen{
+    height: 30rem;
+  }
+}
+
+@media (max-width: 509px) and (min-width: 353px){
+  #settings.collapsibleOpen{
+    height: 35rem;
+  }
+}
+
+@media (max-width: 352px){
+  #settings.collapsibleOpen{
+    height: 40rem;
+  }
+}
+
+#settings:not(.open){
+  height: 0;
 }
 
 #results h2{
@@ -35,4 +97,19 @@
 .langError{
   color: red !important;
   font-weight: 500;
+}
+
+footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  height: 1.5rem;
+  font-weight: 300;
+}
+
+footer a{
+  text-decoration: none;
+  color: inherit;
 }
